@@ -5,7 +5,7 @@
 ### Creating zen class database:
 
   
-```json
+```
   use zenClass 
 ```
 
@@ -13,7 +13,7 @@
 
 ### Assume the batch has around 3 students.
   
-  ```json
+  ```
   db.users.insertMany(
   [
   { "_id": 1, "name": "Chowiya", "email": "chowiya@example.com" },
@@ -24,7 +24,7 @@
 
  ## 2.)Codekata collection:
 
-```json
+```
 db.codekata.insertMany(
 [
   { "_id": 1, "user_id": 1, "problems_solved": 120 },
@@ -35,7 +35,7 @@ db.codekata.insertMany(
 
 ## 3.)Attendance collection:
 
-```json
+```
 db.attendance.insertMany(
 [
   { "_id": 1, "user_id": 1, "date": "2020-10-15", "status": "Present" },
@@ -46,7 +46,7 @@ db.attendance.insertMany(
 
 ## 4.) Topics collection:
 
-```json
+```
 db.topics.insertMany(
 [
   { "_id": 1, "name": "JavaScript", "date": "2020-10-05" },
@@ -56,7 +56,7 @@ db.topics.insertMany(
 
 ## 5.) Task collection:
 
-```json
+```
 db.tasks.insertMany(
 [
   { "_id": 1, "name": "JavaScript", "date": "2020-10-05" },
@@ -66,7 +66,7 @@ db.tasks.insertMany(
 
 ## 6.) Company_drives collection:
 
-```json
+```
 db.company_drives.insertMany(
 [
   { "_id": 1, "company_name": "Google", "date": "2020-10-20", "students_appeared": [1, 2] },
@@ -76,7 +76,7 @@ db.company_drives.insertMany(
 
 ## 7.) Mentors collection:
 
-```json
+```
 db.mentors.insertMany(
 [
   { "_id": 1, "name": "Mentor A", "mentees_count": 10 },
@@ -89,13 +89,13 @@ db.mentors.insertMany(
 ## 1.Find all the topics and tasks taught in the month of October
 
 - To find all Topic
-```json
+```
 
 db.topics.find();
 
 ```
 - To find task in October
-```json
+```
 db.tasks.find({ date: { $gte: "2020-10-01", $lte: "2020-10-31" } })
 
 ```
@@ -103,7 +103,7 @@ db.tasks.find({ date: { $gte: "2020-10-01", $lte: "2020-10-31" } })
 
 
 ## 2. Find all the company drives which appeared between 15-Oct-2020 and 31-Oct-2020
-```json
+```
 db.company_drives.find({ date: { $gte: "2020-10-15", $lte: "2020-10-31" } })
 
 
@@ -112,19 +112,19 @@ db.company_drives.find({ date: { $gte: "2020-10-15", $lte: "2020-10-31" } })
 ## 3. Find all the company drives and students who appeared for the placement
 
 - To find all company drives
-```json
+```
 db.company_drives.find();
 
 ```
 - To find student who appeared for placement
-```json
+```
 db.users.find({ _id: { $in: [1, 2, 3] } });
 
 ```
 
 ## 4.Find the number of problems solved by each user in Codekata
 
-```json
+```
 db.codekata.aggregate([
   {
     $lookup: {
@@ -146,7 +146,7 @@ db.codekata.aggregate([
 
 ## 5.  Find all the mentors who have a mentee count of more than 15
 
-```json
+```
 db.mentors.find({
   mentees_count: { $gt: 15 }
 });
@@ -155,7 +155,7 @@ db.mentors.find({
 
 ## 6.Find the number of users who are absent and tasks not submitted between 15-Oct-2020 and 31-Oct-2020
 
-```json
+```
 db.attendance.aggregate([
   {$match: {date: { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") },status: "Absent"}},
   {
