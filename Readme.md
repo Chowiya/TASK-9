@@ -5,15 +5,14 @@
 ### Creating zen class database:
 
   
-```json
+```
   use zenClass
 ```
-
 ## 1.) users collection 
 
 ### Assume the batch has around 3 students.
   
-  ```json
+  ```
   db.users.insertMany([
   {
     _id: ObjectId("user_id1"),
@@ -59,7 +58,7 @@
 
  ## 2.)Codekata collection:
 
-```json
+```
 db.codekata.insertMany([
   { _id: ObjectId("codekata1"), user_id: ObjectId("user_id1"), problems_solved: 150 },
   { _id: ObjectId("codekata2"), user_id: ObjectId("user_id2"), problems_solved: 80 },
@@ -68,7 +67,7 @@ db.codekata.insertMany([
 
 ## 3.)Attendance collection:
 
-```json
+```
 db.attendance.insertMany([
   { _id: ObjectId("attendance1"), user_id: ObjectId("user_id1"), date: new ISODate("2024-10-15"), status: "Present" },
   { _id: ObjectId("attendance2"), user_id: ObjectId("user_id1"), date: new ISODate("2024-10-16"), status: "Absent" },
@@ -79,7 +78,7 @@ db.attendance.insertMany([
 
 ## 4.) Topics collection:
 
-```json
+```
 db.topics.insertMany([
   { _id: ObjectId("topic_id1"), topic_name: "Javascript", date: new ISODate("2024-10-12") },
   { _id: ObjectId("topic_id2"), topic_name: "React js", date: new ISODate("2024-10-18") }
@@ -88,7 +87,7 @@ db.topics.insertMany([
 
 ## 5.) Task collection:
 
-```json
+```
 db.tasks.insertMany([
   { _id: ObjectId("task_id1"), task_name: "Expensive calculator using js", date: new ISODate("2024-10-15"), topic_id: ObjectId("topic_id1") },
   { _id: ObjectId("task_id2"), task_name: "Movie searching App using react-router-dom", date: new ISODate("2024-10-16"), topic_id: ObjectId("topic_id2") }
@@ -97,7 +96,7 @@ db.tasks.insertMany([
 
 ## 6.) Company_drives collection:
 
-```json
+```
 db.company_drives.insertMany([
   {
     _id: ObjectId("drive_id1"),
@@ -116,7 +115,7 @@ db.company_drives.insertMany([
 
 ## 7.) Mentors collection:
 
-```json
+```
 db.mentors.insertMany([
   {
     _id: ObjectId("mentor_id1"),
@@ -137,7 +136,7 @@ db.mentors.insertMany([
 
 ## 1.Find all the topics and tasks taught in the month of October
 
-```json
+```
 db.topics.aggregate([
   {
     $match: {date: { $gte: new ISODate("2020-10-01"),$lte:new ISODate("2020-10-31") }
@@ -164,7 +163,7 @@ db.topics.aggregate([
 
 
 ## 2. Find all the company drives which appeared between 15-Oct-2020 and 31-Oct-2020
-```json
+```
 db.company_drives.find({
   date: { $gte: new ISODate("2020-10-15"), $lte: new ISODate("2020-10-31") }
 });
@@ -172,7 +171,7 @@ db.company_drives.find({
 ```
 
 ## 3. Find all the company drives and students who appeared for the placement
-```json
+```
 db.company_drives.aggregate([
   {
     $lookup: {
@@ -195,7 +194,7 @@ db.company_drives.aggregate([
 
 ## 4.Find the number of problems solved by each user in Codekata
 
-```json
+```
 db.codekata.aggregate([
   {
     $lookup: {from: "users",localField: "user_id",foreignField: "_id",as: "user_details"}
@@ -213,7 +212,7 @@ db.codekata.aggregate([
 
 ## 5.  Find all the mentors who have a mentee count of more than 15
 
-```json
+```
 db.mentors.find({
   mentees_count: { $gt: 15 }
 });
@@ -222,7 +221,7 @@ db.mentors.find({
 
 ## 6.Find the number of users who are absent and tasks not submitted between 15-Oct-2020 and 31-Oct-2020
 
-```json
+```
 db.users.aggregate([{
     $lookup: {
       from: "attendance",
